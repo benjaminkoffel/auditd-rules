@@ -8,7 +8,7 @@ Linux Man Pages: auditd.conf (5)  https://www.systutorials.com/docs/linux/man/5-
 
 ## Usage
 ```
-apt install auditd
-cp audit.rules > /etc/audit/rules.d/audit.rules
+apt install -y auditd
+cp audit.rules /etc/audit/rules.d/audit.rules
 service auditd restart
 ```
