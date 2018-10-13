@@ -296,6 +296,7 @@
 -w /usr/bin/wireshark -p x -k susp_activity
 -w /usr/bin/rawshark -p x -k susp_activity
 -w /usr/bin/rdesktop -p x -k sbin_susp
+-w /usr/bin/dig -p x -k susp_activity
 
 ## Sbin suspicious activity
 -w /sbin/iptables -p x -k sbin_susp 
@@ -371,6 +372,10 @@
 -a always,exit -F arch=b64 -S rename -S renameat -S truncate -S chmod -S setxattr -S lsetxattr -S removexattr -S lremovexattr -F exit=-EACCES -k file_modification
 -a always,exit -F arch=b32 -S rename -S renameat -S truncate -S chmod -S setxattr -S lsetxattr -S removexattr -S lremovexattr -F exit=-EPERM -k file_modification
 -a always,exit -F arch=b64 -S rename -S renameat -S truncate -S chmod -S setxattr -S lsetxattr -S removexattr -S lremovexattr -F exit=-EPERM -k file_modification
+
+## Network Connections
+-a exit,always -F arch=b32 -F a0=3 -F a2=16 -F exit=0 -S connect -k netconn
+-a exit,always -F arch=b64 -F a0=3 -F a2=16 -F exit=0 -S connect -k netconn
 
 # Make the configuration immutable --------------------------------------------
 ##-e 2
